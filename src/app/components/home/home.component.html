@@ -1,0 +1,98 @@
+<div class="home-container">
+  <header class="hero">
+    <div class="container">
+      <div class="hero-content fade-in">
+        <h1 class="hero-title">Discover Sacred India</h1>
+        <p class="hero-subtitle">Explore the spiritual and cultural heritage of India's most sacred cities</p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number">{{ locations.length }}</span>
+            <span class="stat-label">Sacred Cities</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">50+</span>
+            <span class="stat-label">Holy Places</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">1000+</span>
+            <span class="stat-label">Years of History</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+      <section class="locations-section">
+        <div class="section-header">
+          <h2 class="section-title">Explore Destinations</h2>
+          <p class="section-subtitle">Choose a sacred city to begin your spiritual journey</p>
+        </div>
+
+        <div class="locations-grid">
+          <div *ngFor="let location of locations; let i = index" class="location-card"
+            [style.animation-delay]="i * 0.1 + 's'" (click)="navigateToLocation(location.id)">
+            <div class="card-image-wrapper">
+              <img [src]="location.image" [alt]="location.name" class="card-image">
+              <div class="card-overlay"></div>
+              <div class="card-badge">
+                <span class="badge-icon">📍</span>
+                <span class="badge-text">Sacred City</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <h3 class="card-title">{{ location.name }}</h3>
+              <p class="card-description">{{ location.description }}</p>
+              <div class="card-footer">
+                <div class="category-count">
+                  <span class="count-icon">🏛️</span>
+                  <span class="count-text">{{ location.categories.length }} Categories</span>
+                </div>
+                <button class="btn-explore">
+                  <span>Explore</span>
+                  <span class="arrow">→</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <hr>
+      <section class="features-section">
+        <div class="section-header">
+          <h2 class="section-title">Our Features</h2>
+          <p class="section-subtitle">You will know the history of the place</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card slide-in-up">
+            <div class="feature-icon">🛕</div>
+            <h3 class="feature-title">Sacred Temples</h3>
+            <p class="feature-description">Discover ancient temples with rich history and spiritual significance</p>
+          </div>
+          <div class="feature-card slide-in-up" style="animation-delay: 0.1s;">
+            <div class="feature-icon">🌅</div>
+            <h3 class="feature-title">Scenic Beauty</h3>
+            <p class="feature-description">Experience breathtaking views of ghats, rivers, and landscapes</p>
+          </div>
+          <div class="feature-card slide-in-up" style="animation-delay: 0.2s;">
+            <div class="feature-icon">🗺️</div>
+            <h3 class="feature-title">Easy Navigation</h3>
+            <p class="feature-description">Get directions to any location with integrated Google Maps</p>
+          </div>
+          <div class="feature-card slide-in-up" style="animation-delay: 0.3s;">
+            <div class="feature-icon">📖</div>
+            <h3 class="feature-title">Rich History</h3>
+            <p class="feature-description">Learn about the fascinating history and legends of each place</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-text">© 2025 Location Guide. Explore the spiritual heart of India.</p>
+    </div>
+  </footer>
+</div>

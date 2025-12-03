@@ -1,0 +1,112 @@
+<div class="category-details-container" *ngIf="category">
+    <!-- Header -->
+    <header class="category-header">
+        <div class="container">
+            <button class="btn-back" (click)="goBack()">
+                <span class="back-icon">←</span>
+                <span>Back</span>
+            </button>
+            <div class="header-content fade-in">
+                <div class="category-icon-large">{{ category.icon }}</div>
+                <h1 class="category-title">{{ category.name }}</h1>
+                <p class="category-subtitle">{{ category.places.length }} {{ category.places.length === 1 ? 'Place' :
+                    'Places' }} to Explore</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Places Grid -->
+    <main class="main-content">
+        <div class="container">
+            <div class="places-grid">
+                <div *ngFor="let place of category.places; let i = index" class="place-card"
+                    [style.animation-delay]="i * 0.1 + 's'" (click)="selectPlace(place)">
+                    <div class="place-image-wrapper">
+                        <img [src]="place.image" [alt]="place.name" class="place-image">
+                        <div class="image-overlay"></div>
+                        <div class="place-badge">
+                            <span class="badge-icon">📍</span>
+                        </div>
+                    </div>
+                    <div class="place-content">
+                        <h3 class="place-title">{{ place.name }}</h3>
+                        <p class="place-description">{{ place.description }}</p>
+                        <div class="place-footer">
+                            <div class="place-address">
+                                <span class="address-icon">📍</span>
+                                <span class="address-text">{{ place.address.split(',')[0] }}</span>
+                            </div>
+                            <button class="btn-details">
+                                <span>Details</span>
+                                <span class="arrow">→</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Place Details Modal -->
+<div class="modal-overlay" *ngIf="selectedPlace" (click)="closeDetails()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <button class="btn-close" (click)="closeDetails()">
+            <span>✕</span>
+        </button>
+
+        <div class="modal-header">
+            <img [src]="selectedPlace.image" [alt]="selectedPlace.name" class="modal-image">
+            <div class="modal-header-overlay"></div>
+            <div class="modal-header-content">
+                <h2 class="modal-title">{{ selectedPlace.name }}</h2>
+                <p class="modal-subtitle">{{ selectedPlace.description }}</p>
+            </div>
+        </div>
+
+        <div class="modal-body">
+            <div class="info-section">
+                <div class="info-label">
+                    <span class="label-icon">📖</span>
+                    <span class="label-text">History & Significance</span>
+                </div>
+                <p class="info-content">{{ selectedPlace.history }}</p>
+            </div>
+
+            <div class="info-section">
+                <div class="info-label">
+                    <span class="label-icon">📍</span>
+                    <span class="label-text">Address</span>
+                </div>
+                <p class="info-content">{{ selectedPlace.address }}</p>
+            </div>
+
+            <div class="info-section">
+                <div class="info-label">
+                    <span class="label-icon">🗺️</span>
+                    <span class="label-text">Coordinates</span>
+                </div>
+                <p class="info-content">{{ selectedPlace.latitude }}, {{ selectedPlace.longitude }}</p>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn-navigate" (click)="navigateToPlace(selectedPlace)">
+                <span class="navigate-icon">🧭</span>
+                <span>Navigate with Google Maps</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Error State -->
+<div class="error-container" *ngIf="!category">
+    <div class="container">
+        <div class="error-content">
+            <div class="error-icon">😕</div>
+            <h2 class="error-title">Category Not Found</h2>
+            <p class="error-text">The category you're looking for doesn't exist.</p>
+            <button class="btn-primary" (click)="goBack()">Go Back</button>
+        </div>
+    </div>
+</div>
