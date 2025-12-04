@@ -146,31 +146,23 @@ export class LocationService {
           ]
         },
         {
-          id: 'bus-stand',
+          id: 'bus',
           name: 'Bus & Shelter Stand',
-          icon: '🚌',
+          icon: '🚻',
           showList: false,
-          mapImage: 'assets/images/1.jpg',
+          mapImage: 'assets/images/2.jpg',
           places: [
             {
-              id: 'blue-lassi',
-              name: 'Blue Lassi Shop',
-              description: 'World-famous lassi shop serving traditional Indian yogurt drinks',
-              history: 'Established in 1925, Blue Lassi is one of the oldest and most famous lassi shops in Varanasi. Located in a narrow lane near Kashi Vishwanath Temple, this small shop has been serving delicious lassis for four generations. The walls are covered with photographs and notes from visitors worldwide. They offer over 100 varieties of lassi, from traditional sweet and salty to exotic fruit flavors.',
-              image: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=800',
-              latitude: 25.3104,
-              longitude: 83.0107,
-              address: 'Kachori Gali, Varanasi, Uttar Pradesh 221001'
-            },
-            {
-              id: 'pizzeria-vaatika',
-              name: 'Pizzeria Vaatika Cafe',
-              description: 'Rooftop cafe with Ganges view serving international cuisine',
-              history: 'A popular rooftop restaurant offering panoramic views of the Ganges and the ghats. Established in the early 2000s, it has become a favorite among travelers for its relaxed atmosphere, good food, and stunning sunset views. The cafe serves a mix of Indian and international cuisine, including wood-fired pizzas, pasta, and traditional Indian dishes.',
-              image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800',
+              id: 'ghat-facilities',
+              name: 'Ghat Public Facilities',
+              description: 'Clean public toilets available at major ghats',
+              history: 'As part of the Swachh Bharat Mission and Smart City initiatives, Varanasi has developed modern public toilet facilities at all major ghats. These facilities are maintained by the Varanasi Municipal Corporation and are equipped with modern amenities. The initiative has significantly improved sanitation infrastructure for tourists and pilgrims.',
+              image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800',
               latitude: 25.3095,
-              longitude: 83.0130,
-              address: 'D-3/24, Pandey Ghat, Varanasi, Uttar Pradesh 221001'
+              longitude: 83.0134,
+              x: 70,
+              y: 60,
+              address: 'Available at all major ghats in Varanasi'
             }
           ]
         }

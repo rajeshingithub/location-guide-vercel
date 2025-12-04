@@ -63,12 +63,67 @@
     </main>
 </div>
 
-<!-- Modal Code remains same -->
+
+
+<!-- Place Details Modal -->
 <div class="modal-overlay" *ngIf="selectedPlace" (click)="closeDetails()">
     <div class="modal-content" (click)="$event.stopPropagation()">
-        <!-- ... modal content ... -->
-        <button class="btn-navigate" (click)="navigateToPlace(selectedPlace)">
-            Google Maps
+        <button class="btn-close" (click)="closeDetails()">
+            <span>✕</span>
         </button>
+
+        <div class="modal-header">
+            <img [src]="selectedPlace.image" [alt]="selectedPlace.name" class="modal-image">
+            <div class="modal-header-overlay"></div>
+            <div class="modal-header-content">
+                <h2 class="modal-title">{{ selectedPlace.name }}</h2>
+                <p class="modal-subtitle">{{ selectedPlace.description }}</p>
+            </div>
+        </div>
+
+        <div class="modal-body">
+            <div class="info-section">
+                <div class="info-label">
+                    <span class="label-icon">📖</span>
+                    <span class="label-text">History & Significance</span>
+                </div>
+                <p class="info-content">{{ selectedPlace.history }}</p>
+            </div>
+
+            <div class="info-section">
+                <div class="info-label">
+                    <span class="label-icon">📍</span>
+                    <span class="label-text">Address</span>
+                </div>
+                <p class="info-content">{{ selectedPlace.address }}</p>
+            </div>
+
+            <div class="info-section">
+                <div class="info-label">
+                    <span class="label-icon">🗺️</span>
+                    <span class="label-text">Coordinates</span>
+                </div>
+                <p class="info-content">{{ selectedPlace.latitude }}, {{ selectedPlace.longitude }}</p>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn-navigate" (click)="navigateToPlace(selectedPlace)">
+                <span class="navigate-icon">🧭</span>
+                <span>Navigate with Google Maps</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Error State -->
+<div class="error-container" *ngIf="!category">
+    <div class="container">
+        <div class="error-content">
+            <div class="error-icon">😕</div>
+            <h2 class="error-title">Category Not Found</h2>
+            <p class="error-text">The category you're looking for doesn't exist.</p>
+            <button class="btn-primary" (click)="goBack()">Go Back</button>
+        </div>
     </div>
 </div>

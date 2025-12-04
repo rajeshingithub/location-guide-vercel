@@ -1,42 +1,29 @@
-/* --- THEME VARIABLES (Light Mode Default) --- */
+/* --- THEME VARIABLES --- */
 :root {
-    /* Slightly darker page bg to make white cards pop */
     --bg-color: #f0f2f5;
     --text-primary: #1a1a1a;
     --text-secondary: #64748b;
-
-    /* Pure white card */
     --card-bg: #ffffff;
-
-    /* Stronger, visible shadow for Light Mode */
     --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
     --card-hover-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
-
     --meta-box-bg: #f1f5f9;
     --meta-text: #475569;
-
     --icon-bg-small: #f1f5f9;
-
     --back-btn-bg: rgba(255, 255, 255, 0.95);
     --back-btn-text: #0f172a;
 }
 
-/* --- DARK MODE OVERRIDES --- */
 @media (prefers-color-scheme: dark) {
     :root {
         --bg-color: #121212;
         --text-primary: #f8fafc;
         --text-secondary: #94a3b8;
         --card-bg: #1e1e1e;
-        /* Dark mode shadows need to be subtler but exist */
         --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
         --card-hover-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
-
         --meta-box-bg: #2d2d2d;
         --meta-text: #cbd5e0;
-
         --icon-bg-small: #2d2d2d;
-
         --back-btn-bg: rgba(30, 30, 30, 0.8);
         --back-btn-text: #ffffff;
     }
@@ -51,35 +38,145 @@
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* --- STATIC MAP CONTAINER --- */
+/* --- HEADER SECTION --- */
+.location-header {
+    position: relative;
+    width: 100%;
+    height: 35vh;
+    min-height: 300px;
+    padding-top: 30px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #4a5568;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.header-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.8) 100%);
+    z-index: 1;
+}
+
+.header-content {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    max-width: 700px;
+    width: 100%;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.location-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    line-height: 1.1;
+    color: white;
+    letter-spacing: -0.5px;
+}
+
+.location-description {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 25px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+}
+
+/* Buttons */
+.btn-back {
+    position: absolute;
+    top: 30px;
+    left: 25px;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+    background: rgba(255, 255, 255, 0.9);
+    color: #1a1a1a;
+    transform: translateX(-3px);
+}
+
+.btn-view-photos {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-view-photos:hover {
+    background: white;
+    color: #1a1a1a;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* --- STATIC MAP SECTION --- */
 .static-map-container {
     overflow: visible;
     position: relative;
     width: 100%;
     max-width: 800px;
     margin: 0px auto 40px auto;
-    /* Overlap header */
     border-radius: 24px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
     background: #e5e5e5;
-    /* Loading bg */
     z-index: 5;
 }
 
-/* The Map Image */
 .map-image {
     width: 100%;
     display: block;
-    /* Aspect ratio ensures height is consistent */
     aspect-ratio: 4/3;
     object-fit: cover;
 }
 
-/* --- THE PIN --- */
+/* Map Pins & Tooltips */
 .map-pin {
     position: absolute;
     transform: translate(-50%, -100%);
-    /* Centers the point of the pin */
     cursor: pointer;
     z-index: 10;
     display: flex;
@@ -87,19 +184,14 @@
     align-items: center;
 }
 
-/* The Dot Icon */
 .pin-icon {
     width: 35px;
     height: 35px;
     background: #ff3333;
-    /* border: 3px solid white; */
     border-radius: 50%;
-    /* transform: rotate(-45deg); */
-    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); */
     transition: all 0.2s ease;
 }
 
-/* Pulse Animation */
 .map-pin::after {
     content: '';
     position: absolute;
@@ -115,15 +207,12 @@
 .map-pin:hover .pin-icon,
 .map-pin.active .pin-icon {
     background: #6b63ff;
-    /* Active color */
     transform: rotate(-45deg) scale(1.2);
 }
 
-/* --- TOOLTIP (Popup Card) --- */
 .pin-tooltip {
     position: absolute;
     bottom: 45px;
-    /* Above the pin */
     left: 50%;
     transform: translateX(-50%);
     background: rgba(255, 255, 255, 0.95);
@@ -135,38 +224,21 @@
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     z-index: 20;
-    pointer-events: none;
+    pointer-events: auto;
+    /* Required for buttons */
     height: auto;
-    /* Allow height to grow */
     padding-bottom: 12px;
-    z-index: 100;
-    /* Ensure it sits on top */
 }
 
-/* NEW: Style for the Open Map button */
-.btn-open-map {
-    margin-top: 8px;
-    background: #eef2ff;
-    color: #4f46e5;
-    border: 1px solid #c7d2fe;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    cursor: pointer;
-    width: 100%;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-}
-
-.btn-open-map:hover {
-    background: #4f46e5;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2);
+.pin-tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    margin-left: -6px;
+    border-width: 6px 6px 0;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.95) transparent transparent transparent;
 }
 
 .tooltip-img {
@@ -192,194 +264,29 @@
     display: block;
 }
 
-/* Small Triangle for Tooltip */
-.pin-tooltip::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 50%;
-    margin-left: -6px;
-    border-width: 6px 6px 0;
-    border-style: solid;
-    border-color: rgba(255, 255, 255, 0.95) transparent transparent transparent;
-}
-
-@keyframes popIn {
-    from {
-        opacity: 0;
-        transform: translateX(-50%) scale(0.8);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(-50%) scale(1);
-    }
-}
-
-/* --- HEADER SECTION --- */
-.location-header {
-    position: relative;
-    width: 100%;
-    height: 35vh;
-    min-height: 300px;
-    padding-top: 30px;
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: #4a5568;
-    /* Fallback color */
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
-
-    /* Modern rounded bottom corners */
-    border-bottom-left-radius: 40px;
-    border-bottom-right-radius: 40px;
-
-    /* Pull the content up slightly to overlap */
-    margin-bottom: 20px;
-
-    /* Shadow to separate header from body */
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-    /* Clips the overlay to the border radius */
-}
-
-.large-card-flex {
-    display: flex;
-    width: 90%;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.large-card-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.large-card-right {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-
-.header-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    /* Gradient: Transparent at top -> Darker at bottom for text readability */
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.8) 100%);
-    z-index: 1;
-}
-
-.header-content {
-    position: relative;
-    z-index: 2;
-    padding: 20px;
-    max-width: 700px;
-    width: 100%;
-    /* Animation */
-    animation: fadeIn 0.8s ease-out;
-}
-
-/* Back Button - Top Left Floating */
-.btn-back {
-    position: absolute;
-    top: 30px;
-    left: 25px;
-    z-index: 10;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: white;
-    padding: 8px 16px;
-    border-radius: 30px;
+.btn-open-map {
+    margin-top: 8px;
+    background: #eef2ff;
+    color: #4f46e5;
+    border: 1px solid #c7d2fe;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
     font-weight: 600;
-    font-size: 0.9rem;
     cursor: pointer;
+    width: 100%;
+    transition: all 0.2s ease;
     display: flex;
     align-items: center;
-    gap: 8px;
-    transition: all 0.3s ease;
+    justify-content: center;
+    gap: 4px;
 }
 
-.btn-back:hover {
-    background: rgba(255, 255, 255, 0.9);
-    color: #1a1a1a;
-    transform: translateX(-3px);
-}
-
-.location-title {
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    font-weight: 800;
-    margin-bottom: 10px;
-    /* Soft shadow for depth */
-    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    line-height: 1.1;
+.btn-open-map:hover {
+    background: #4f46e5;
     color: white;
-    letter-spacing: -0.5px;
-}
-
-.location-description {
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 25px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.5;
-}
-
-/* View Photos Pill Button */
-.btn-view-photos {
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    color: white;
-    padding: 10px 24px;
-    border-radius: 50px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.btn-view-photos:hover {
-    background: white;
-    color: #1a1a1a;
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2);
 }
 
 /* --- MAIN CONTENT --- */
@@ -387,7 +294,6 @@
     position: relative;
     z-index: 3;
     padding: 0 20px 60px;
-    /* More bottom padding */
     max-width: 800px;
     margin: 0 auto;
 }
@@ -408,42 +314,51 @@
     font-size: 1rem;
 }
 
-/* --- GRID SYSTEM --- */
 .categories-grid {
     display: flex;
     flex-direction: column;
     gap: 24px;
-    /* Space between cards */
 }
 
-/* --- COMMON CARD STYLES --- */
+/* --- CATEGORY CARDS --- */
 .category-card {
-    background: var(--card-bg);
-    /* Ensure this is white in light mode */
-    border-radius: 28px;
-
-    /* Here is the visible shadow */
-    box-shadow: var(--card-shadow);
-
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    /* Subtle border */
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    animation: _ngcontent-ng-c1640264298_slide-up .6s ease-out backwards;
 }
 
 .category-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-8px);
     box-shadow: var(--card-hover-shadow);
 }
 
-/* --- LARGE CARD (Temples & Scenery) --- */
+/* Large Card Styles */
 .large-card {
     padding: 20px;
     text-align: center;
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+.large-card-flex {
+    display: flex;
+    width: 90%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.large-card-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
@@ -480,23 +395,6 @@
     letter-spacing: 0.5px;
 }
 
-.place-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    cursor: pointer;
-    transition: all var(--transition-normal);
-    animation: slide-up 0.6s ease-out backwards;
-}
-
-.place-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
 .btn-view-purple {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -516,7 +414,6 @@
     opacity: 0.9;
 }
 
-/* CIRCLES */
 .category-preview-circles {
     height: 70px;
     display: flex;
@@ -533,10 +430,8 @@
     background-size: cover;
     background-position: center;
     border: 4px solid var(--card-bg);
-    /* Use card bg to mask overlap */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     margin-left: -25px;
-    /* Larger overlap */
     position: relative;
     z-index: 1;
     transition: transform 0.3s ease;
@@ -551,7 +446,7 @@
     z-index: 10;
 }
 
-/* --- SMALL CARD (Gardens/Facilities) --- */
+/* Small Card Styles */
 .small-card {
     padding: 20px 24px;
     display: flex;
@@ -591,11 +486,6 @@
     margin: 0;
 }
 
-.small-card .place-count {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-}
-
 .btn-view-blue {
     background: #5a8dee;
     color: white;
@@ -606,4 +496,29 @@
     font-weight: 600;
     white-space: nowrap;
     box-shadow: 0 4px 10px rgba(90, 141, 238, 0.3);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
 }
