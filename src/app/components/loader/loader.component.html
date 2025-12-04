@@ -1,0 +1,10 @@
+@if (loading$ | async) {
+<div class="loader-overlay" [@fadeInOut]>
+    <div class="loader-content">
+        <div class="loader-image-container">
+            <img src="assets/images/loader.jpg" alt="Loading" class="loader-image">
+        </div>
+        <div class="loader-text">Loading...</div>
+    </div>
+</div>
+}

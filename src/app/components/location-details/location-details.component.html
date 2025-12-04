@@ -2,36 +2,53 @@
 
     <!-- HEADER SECTION -->
     <div class="location-header" [style.background-image]="headerImageCss">
-
-        <!-- Gradient Overlay -->
         <div class="header-overlay"></div>
-
-        <!-- Back Button -->
         <button class="btn-back" (click)="goBack()">
             <span>←</span> Back
         </button>
-
-        <!-- Centered Content -->
         <div class="header-content">
-            <h1 class="location-title">{{ location.name }}</h1>
+            <h2 class="location-title">{{ location.name }}</h2>
             <p class="location-description">{{ location.description }}</p>
-
             <button class="btn-view-photos">
                 <span>📷</span> View Photos
             </button>
         </div>
     </div>
 
-    <!-- 2. MAIN CATEGORIES -->
+    <!-- STATIC MAP SECTION -->
+    <div class="static-map-container fade-in">
+        <img [src]="staticMapUrl" alt="City Map" class="map-image">
+
+        <!-- <div *ngFor="let pin of mapPins" class="map-pin" [class.active]="activePinId === pin.id" [style.left.%]="pin.x"
+            [style.top.%]="pin.y" (click)="togglePin(pin.id)">
+
+            
+            <div class="pin-icon"></div>
+
+            
+            <div class="pin-tooltip" *ngIf="activePinId === pin.id">
+                <img [src]="pin.image || 'assets/placeholder.jpg'" class="tooltip-img">
+                <h4 class="tooltip-title">{{ pin.name }}</h4>
+                <span class="tooltip-cat">{{ pin.categoryName }}</span>
+                
+                
+                <button class="btn-open-map" 
+                        (click)="openGoogleMaps($event, pin.latitude, pin.longitude)">
+                    📍 Open Map
+                </button>
+            </div>
+        </div> -->
+    </div>
+
+    <!-- MAIN CATEGORIES -->
     <main class="main-content">
         <h2 class="section-title">Explore Categories</h2>
         <p class="section-subtitle">Discover temples, scenery, gardens, facilities, and more</p>
 
         <div class="categories-grid">
             <ng-container *ngFor="let category of location.categories; let i = index">
-
                 <!-- LARGE CARD -->
-                <div *ngIf="isLargeCategory(category.name)" class="place-card large-card"
+                <div *ngIf="isLargeCategory(category.name)" class="category-card large-card"
                     (click)="navigateToCategory(category.id)">
 
                     <div class="large-card-flex">
@@ -40,12 +57,10 @@
                             <h3 class="category-title">{{ category.name }}</h3>
                         </div>
                         <div class="category-preview-circles">
-                            <!-- Using picsum for placeholder circles -->
                             <div *ngFor="let place of category.places.slice(0, 3); let j = index" class="circle-image"
                                 [style.background-image]="'url(https://picsum.photos/seed/' + (i + j + 55) + '/100)'"
                                 [style.z-index]="j">
                             </div>
-                            <!-- Fallback circles so it doesn't look empty -->
                             <div *ngIf="category.places.length === 0" class="circle-image"
                                 style="background-image: url('assets/images/banaras.png');"></div>
                             <div *ngIf="category.places.length === 0" class="circle-image"
@@ -56,12 +71,10 @@
                         <span class="place-count">{{ category.places.length }} Places</span>
                         <button class="btn-view-purple">View All <span>→</span></button>
                     </div>
-
-
                 </div>
 
                 <!-- SMALL CARD -->
-                <div *ngIf="!isLargeCategory(category.name)" class="place-card small-card"
+                <div *ngIf="!isLargeCategory(category.name)" class="category-card small-card"
                     (click)="navigateToCategory(category.id)">
 
                     <div class="small-card-left">

@@ -9,14 +9,17 @@ import { Location } from '../../models/location.model';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './location-details.component.html',
-  styleUrl: './location-details.component.css' // Note: Angular 17+ uses styleUrl, older uses styleUrls
+  styleUrl: './location-details.component.css'
 })
 export class LocationDetailsComponent implements OnInit {
   location: Location | undefined;
   locationId: string = '';
-
-  // Variable to hold the final css string
   headerImageCss: string = '';
+
+  // Static Map Variables
+  mapPins: any[] = [];
+  activePinId: string | null = null;
+  staticMapUrl: string = '/assets/images/1.jpg'; // Ensure this image exists!
 
   constructor(
     private route: ActivatedRoute,
@@ -29,21 +32,57 @@ export class LocationDetailsComponent implements OnInit {
       this.locationId = params['id'];
       this.location = this.locationService.getLocationById(this.locationId);
 
-      // Calculate the image path immediately after getting location
       this.setHeaderImage();
+
+      // Update Map Image Logic
+      if (this.location && this.location.mapImage) {
+        this.staticMapUrl = this.location.mapImage;
+      }
+
+      this.prepareMapPins();
     });
+  }
+
+  prepareMapPins(): void {
+    this.mapPins = [];
+    if (this.location && this.location.categories) {
+      this.location.categories.forEach(cat => {
+        // We include specific categories for the Main Location Map
+        if (['Temples', 'Scenery'].includes(cat.name)) {
+          cat.places.forEach(place => {
+            // Only add if x/y coordinates exist for the static map
+            if (place.x !== undefined && place.y !== undefined) {
+              this.mapPins.push({
+                ...place,
+                categoryName: cat.name
+              });
+            }
+          });
+        }
+      });
+    }
+  }
+
+  togglePin(pinId: string): void {
+    if (this.activePinId === pinId) {
+      this.activePinId = null;
+    } else {
+      this.activePinId = pinId;
+    }
+  }
+
+  // NEW: Navigation Function
+  openGoogleMaps(lat: number, lng: number): void {
+    this.locationService.navigateToPlace(lat, lng);
   }
 
   setHeaderImage(): void {
     if (!this.location) return;
-
-    // Logic to map location name to your local assets
-    // Based on your screenshot file names: banaras.png, khajuraho.png, mathura.png, ujjain.png
     const name = this.location.name.toLowerCase();
-    let imageName = 'banaras.png'; // Default fallback
+    let imageName = 'banaras.png';
 
-    if (name.includes('varanasi') || name.includes('banaras')) {
-      imageName = 'banaras.png';
+    if (name.includes('wada')) {
+      imageName = 'd.jpeg';
     } else if (name.includes('mathura')) {
       imageName = 'mathura.png';
     } else if (name.includes('ujjain')) {
@@ -52,8 +91,6 @@ export class LocationDetailsComponent implements OnInit {
       imageName = 'khajuraho.png';
     }
 
-    // Set the full CSS string. 
-    // IMPORTANT: 'assets/...' works because Angular serves 'src/assets' at the root '/assets'
     this.headerImageCss = `url('/assets/images/${imageName}')`;
   }
 

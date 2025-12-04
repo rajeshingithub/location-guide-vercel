@@ -3,6 +3,7 @@ export interface Location {
   name: string;
   image: string;
   description: string;
+  mapImage?: string; // Fallback map for the city
   categories: Category[];
 }
 
@@ -10,6 +11,13 @@ export interface Category {
   id: string;
   name: string;
   icon: string;
+
+  // NEW: Control list visibility from Service
+  showList?: boolean;
+
+  // NEW: Specific map for this category (optional)
+  mapImage?: string;
+
   places: Place[];
 }
 
@@ -22,4 +30,6 @@ export interface Place {
   latitude: number;
   longitude: number;
   address: string;
+  x?: number;
+  y?: number;
 }
