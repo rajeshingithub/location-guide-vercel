@@ -146,13 +146,9 @@
 }
 
 .pin-icon {
-    width: 35px;
-    height: 35px;
-    background: #ff3333;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
-    transition: all 0.2s ease;
-    border: 2px solid white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Pulse Animation */
@@ -170,8 +166,8 @@
 
 .map-pin:hover .pin-icon,
 .map-pin.active .pin-icon {
-    background: #6b63ff;
-    transform: scale(1.2);
+    background: #667eea;
+    transform: scale(1.4);
 }
 
 /* --- PIN TOOLTIP --- */

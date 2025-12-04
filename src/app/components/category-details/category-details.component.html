@@ -20,20 +20,20 @@
     <div class="static-map-container fade-in" *ngIf="mapPins.length > 0">
         <img [src]="staticMapUrl" alt="Category Map" class="map-image">
 
-        <div *ngFor="let pin of mapPins" class="map-pin" [class.active]="activePinId === pin.id" [style.left.%]="pin.x"
-            [style.top.%]="pin.y" (click)="togglePin(pin.id)">
+        <div *ngIf="category.id != 'temples'">
+            <div *ngFor="let pin of mapPins" class="map-pin" [class.active]="activePinId === pin.id"
+                [style.left.%]="pin.x" [style.top.%]="pin.y" (click)="togglePin(pin.id)">
 
-            <div class="pin-icon"></div>
+                <div class="pin-icon"></div>
 
-            <!-- CLICKABLE TOOLTIP -->
-            <!-- The (click) event is here on the wrapper -->
-            <div class="pin-tooltip clickable-tooltip" *ngIf="activePinId === pin.id"
-                (click)="openGoogleMaps($event, pin.latitude, pin.longitude)">
+                <div class="pin-tooltip clickable-tooltip" *ngIf="activePinId === pin.id"
+                    (click)="openGoogleMaps($event, pin.latitude, pin.longitude)">
 
-                <img [src]="pin.image || 'assets/placeholder.jpg'" class="tooltip-img">
-                <h4 class="tooltip-title">{{ pin.name }}</h4>
-                <div class="tooltip-action">
-                    <span>📍 Tap to Navigate</span>
+                    <img [src]="pin.image || 'assets/placeholder.jpg'" class="tooltip-img">
+                    <h4 class="tooltip-title">{{ pin.name }}</h4>
+                    <div class="tooltip-action">
+                        <span>📍 Tap to Navigate</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -45,7 +45,6 @@
             <div class="places-grid">
                 <div *ngFor="let place of category.places; let i = index" class="place-card"
                     (click)="selectPlace(place)">
-                    <!-- Grid content... -->
                     <div class="place-image-wrapper">
                         <img [src]="place.image" class="place-image">
                         <div class="place-badge"><span class="badge-icon">📍</span></div>
@@ -53,7 +52,7 @@
                     <div class="place-content">
                         <h3 class="place-title">{{ place.name }}</h3>
                         <div class="place-footer">
-                            <span class="place-address">{{ place.address.split(',')[0] }}</span>
+                            <span class="place-address">{{ place.description}}</span>
                             <button class="btn-details">Details →</button>
                         </div>
                     </div>
@@ -98,13 +97,13 @@
                 <p class="info-content">{{ selectedPlace.address }}</p>
             </div>
 
-            <div class="info-section">
+            <!-- <div class="info-section">
                 <div class="info-label">
                     <span class="label-icon">🗺️</span>
                     <span class="label-text">Coordinates</span>
                 </div>
                 <p class="info-content">{{ selectedPlace.latitude }}, {{ selectedPlace.longitude }}</p>
-            </div>
+            </div> -->
         </div>
 
         <div class="modal-footer">
