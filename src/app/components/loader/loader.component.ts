@@ -26,6 +26,6 @@ export class LoaderComponent {
   loading$: Observable<boolean>;
 
   constructor(public loaderService: LoaderService) {
-    this.loading$ = this.loaderService.loading$;
+    this.loading$ = this.loaderService.isLoading;
   }
 }

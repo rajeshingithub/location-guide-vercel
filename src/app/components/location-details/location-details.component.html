@@ -9,7 +9,7 @@
         <div class="header-content">
             <h2 class="location-title">{{ location.name }}</h2>
             <p class="location-description">{{ location.description }}</p>
-            <button class="btn-view-photos">
+            <button class="btn-view-photos" (click)="openGallery()">
                 <span>📷</span> View Photos
             </button>
         </div>
@@ -85,4 +85,27 @@
             </ng-container>
         </div>
     </main>
+</div>
+<!-- ================================================= -->
+<!-- GALLERY MODAL (Must be outside other divs)        -->
+<!-- ================================================= -->
+<div class="gallery-overlay" *ngIf="isGalleryOpen" (click)="closeGallery()">
+
+    <button class="gallery-close" (click)="closeGallery()">✕</button>
+
+    <div class="gallery-content" (click)="$event.stopPropagation()">
+        <!-- Prev Button -->
+        <button class="nav-btn prev" (click)="prevImage($event)">❮</button>
+
+        <!-- Main Image -->
+        <div class="image-wrapper">
+            <img [src]="galleryImages[currentImageIndex]" class="gallery-img" alt="Gallery Image">
+            <div class="gallery-caption">
+                {{ currentImageIndex + 1 }} / {{ galleryImages.length }}
+            </div>
+        </div>
+
+        <!-- Next Button -->
+        <button class="nav-btn next" (click)="nextImage($event)">❯</button>
+    </div>
 </div>

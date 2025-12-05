@@ -20,8 +20,8 @@
 }
 
 .loader-image-container {
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
     border-radius: 50%;
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
@@ -61,8 +61,8 @@
 /* Responsive Design */
 @media (max-width: 768px) {
     .loader-image-container {
-        width: 200px;
-        height: 200px;
+        width: 300px;
+        height: 300px;
     }
 
     .loader-text {
@@ -72,8 +72,8 @@
 
 @media (max-width: 480px) {
     .loader-image-container {
-        width: 150px;
-        height: 150px;
+        width: 250px;
+        height: 250px;
     }
 
     .loader-text {

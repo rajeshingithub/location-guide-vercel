@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocationService } from '../../services/location.service';
@@ -16,10 +16,23 @@ export class LocationDetailsComponent implements OnInit {
   locationId: string = '';
   headerImageCss: string = '';
 
-  // Static Map Variables
+  // Map variables
   mapPins: any[] = [];
   activePinId: string | null = null;
-  staticMapUrl: string = '/assets/images/1.jpg'; // Ensure this image exists!
+  staticMapUrl: string = 'assets/images/002.jpg';
+
+  // --- GALLERY VARIABLES ---
+  isGalleryOpen: boolean = false;
+  currentImageIndex: number = 0;
+
+  // 1. MAKE SURE THIS HAS IMAGES
+  galleryImages: string[] = [
+    'assets/images/a.jpeg',
+    'assets/images/b.jpeg',
+    'assets/images/c.jpeg',
+    'assets/images/d.jpeg',
+    'assets/images/e.jpeg'
+  ];
 
   constructor(
     private route: ActivatedRoute,
@@ -31,16 +44,53 @@ export class LocationDetailsComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.locationId = params['id'];
       this.location = this.locationService.getLocationById(this.locationId);
-
       this.setHeaderImage();
-
-      // Update Map Image Logic
-      if (this.location && this.location.mapImage) {
-        this.staticMapUrl = this.location.mapImage;
-      }
-
       this.prepareMapPins();
     });
+  }
+
+  // --- GALLERY LOGIC ---
+  openGallery(): void {
+    console.log("Opening Gallery...", this.galleryImages); // Check Console
+
+    if (this.galleryImages.length > 0) {
+      this.currentImageIndex = 0;
+      this.isGalleryOpen = true;
+      document.body.style.overflow = 'hidden';
+    } else {
+      console.warn("No images to show in gallery!");
+    }
+  }
+
+  closeGallery(): void {
+    this.isGalleryOpen = false;
+    document.body.style.overflow = 'auto';
+  }
+
+  nextImage(event?: Event): void {
+    if (event) event.stopPropagation();
+    if (this.currentImageIndex < this.galleryImages.length - 1) {
+      this.currentImageIndex++;
+    } else {
+      this.currentImageIndex = 0;
+    }
+  }
+
+  prevImage(event?: Event): void {
+    if (event) event.stopPropagation();
+    if (this.currentImageIndex > 0) {
+      this.currentImageIndex--;
+    } else {
+      this.currentImageIndex = this.galleryImages.length - 1;
+    }
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (!this.isGalleryOpen) return;
+    if (event.key === 'ArrowRight') this.nextImage();
+    if (event.key === 'ArrowLeft') this.prevImage();
+    if (event.key === 'Escape') this.closeGallery();
   }
 
   prepareMapPins(): void {

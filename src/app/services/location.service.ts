@@ -61,7 +61,7 @@ export class LocationService {
               name: 'Shri Govind Rameshwar Temple',
               description: 'A Trikutachala shrine dedicated to the Vaishnavite deities Madhav and Govind.',
               history: 'The name "Shri Govind Rameshwar Temple" most likely refers to the Madhav, Govind, Rameshwar Temple in Agapur village, Goa, which is a Trikutachala (three-shrine) shrine dedicated to Vaishnavite deities, including Madhav (Krishna) and Govind, along with the Shaiv deity Rameshwar.',
-              image: 'assets/images/img56.jpg',
+              image: 'assets/images/img55.png',
               latitude: 17.953027,
               longitude: 73.886800,
               x: 55,
