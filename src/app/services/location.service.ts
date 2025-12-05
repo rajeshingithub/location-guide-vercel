@@ -12,6 +12,23 @@ export class LocationService {
       image: 'assets/images/d.jpeg',
       description: 'The spiritual capital of India, one of the oldest living cities in the world',
       mapImage: 'assets/images/002.jpg',
+      routes: [
+        {
+          name: 'Route A to B',
+          duration: '12 mins',
+          url: 'https://maps.app.goo.gl/3pmaSJY3x84nNNYN6'
+        },
+        {
+          name: 'Route B to C',
+          duration: '18 mins',
+          url: 'https://maps.app.goo.gl/qkXzhRY3WoXnyHCG8'
+        },
+        {
+          name: 'Route C to D',
+          duration: '10 mins',
+          url: 'https://maps.app.goo.gl/GSiWdfnXseWntdos6'
+        }
+      ],
       categories: [
         {
           id: 'temples',

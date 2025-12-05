@@ -4,7 +4,14 @@ export interface Location {
   image: string;
   description: string;
   mapImage?: string; // Fallback map for the city
+  routes?: TravelRoute[];
   categories: Category[];
+}
+
+export interface TravelRoute {
+  name: string;      // e.g., "Airport to City Center"
+  duration: string;  // e.g., "45 mins"
+  url: string;       // e.g., "https://www.google.com/maps/..."
 }
 
 export interface Category {

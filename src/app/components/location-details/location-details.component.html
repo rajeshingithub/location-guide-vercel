@@ -40,6 +40,34 @@
         </div> -->
     </div>
 
+    <!-- ROUTES SECTION -->
+
+    <div class="routes-section fade-in" *ngIf="location.routes && location.routes.length > 0">
+        <div class="container">
+            <h3 class="section-label">Popular Routes</h3>
+
+            <div class="routes-list">
+                <button *ngFor="let route of location.routes" class="route-card" (click)="openRoute(route.url)">
+
+                    <!-- Left: Icon & Name -->
+                    <div class="route-left">
+                        <div class="route-icon-box">
+                            <span class="route-icon">🗺️</span>
+                        </div>
+                        <span class="route-name">{{ route.name }}</span>
+                    </div>
+
+                    <!-- Right: Duration -->
+                    <div class="route-right">
+                        <span class="route-duration">{{ route.duration }}</span>
+                        <span class="route-arrow">→</span>
+                    </div>
+
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- MAIN CATEGORIES -->
     <main class="main-content">
         <h2 class="section-title">Explore Categories</h2>

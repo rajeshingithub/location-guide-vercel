@@ -149,6 +149,11 @@ export class LocationDetailsComponent implements OnInit {
     return largeOnes.includes(name);
   }
 
+  // Open Route Link
+  openRoute(url: string): void {
+    window.open(url, '_blank');
+  }
+
   navigateToCategory(categoryId: string): void {
     this.router.navigate(['/location', this.locationId, 'category', categoryId]);
   }
